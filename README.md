@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+1. Generate Pact Contract in Cypress
+Ensure your Cypress test suite is generating a Pact contract. This can be done by making HTTP requests using Pact's pact library in your Cypress tests.
 
-## Getting Started
+2. Install Pact CLI (if not already installed)
+To publish the generated contract, you’ll need the Pact CLI. You can install it globally with npm or yarn:
+npm install -g @pact-foundation/pact-cli
+3. Publish the Pact Contract
+After Cypress generates the contract file, use the Pact CLI to publish it to your Pact Broker. Run this command in your CI/CD pipeline or as a post-test script in your Cypress configuration.
 
-First, run the development server:
+The command structure looks like this:
+pact-broker publish <pact_file_directory> --consumer-app-version <version> --broker-base-url <broker_url> --broker-token <token>
+Replace the placeholders with:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<pact_file_directory>: Path where the Pact file is saved by Cypress.
+<version>: The version of your consumer application (could be a commit hash or version number).
+<broker_url>: The URL of your Pact Broker.
+<token>: Authentication token if your Pact Broker requires it.
+Example:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+pact-broker publish ./cypress/pacts --consumer-app-version $(git rev-parse --short HEAD) --broker-base-url http://localhost:9292 --broker-token $PACT_BROKER_TOKEN
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Automate in CI/CD Pipeline
+Add the publishing command to your CI/CD pipeline (e.g., in a script section of GitHub Actions, CircleCI, or Jenkins) so that the contract is published after every build or test run.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. Verify the Contract Publishing
+Once published, check your Pact Broker dashboard to confirm the contract is available and accessible by your provider services for verification.
 
-## Learn More
+This approach integrates Pact contract publishing within Cypress, ensuring every test run can update the contract in the Pact Broker automatically.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
