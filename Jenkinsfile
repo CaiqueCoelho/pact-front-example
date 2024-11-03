@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:14-alpine' // Use an appropriate Node.js Docker image
+            args '-u root' // Optional: Run as root user if needed
+        }
+    }
     stages {
         // stage('Checkout') {
         //     steps {
