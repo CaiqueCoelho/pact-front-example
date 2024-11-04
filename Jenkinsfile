@@ -16,11 +16,11 @@ pipeline {
         //         git url: 'https://github.com/seu-usuario/seu-repositorio.git', branch: 'main', credentialsId: 'sua-credencial-git'
         //     }
         // }
-        stage('Verify Docker Access') {
-            steps {
-                sh 'docker --version'
-            }
-        }
+        // stage('Verify Docker Access') {
+        //     steps {
+        //         sh 'docker --version'
+        //     }
+        // }
         stage('Instalar Dependências') {
             steps {
                 // Instala as dependências do projeto
