@@ -7,7 +7,7 @@ pipeline {
     // }
     agent any
     tools {
-        nodejs 'NodeJS 14' // Name must match the one configured in Global Tool Configuration
+        nodejs 'NodeJS 23.1.0' // Name must match the one configured in Global Tool Configuration
     }
     stages {
         // stage('Checkout') {
