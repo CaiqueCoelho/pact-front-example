@@ -21,6 +21,14 @@ pipeline {
         //         sh 'docker --version'
         //     }
         // }
+        stage('Start Application') {
+            steps {
+                // Start the application in the background
+                sh 'npm run dev &'
+                // Wait for the application to be ready
+                sh 'npx wait-on http://localhost:3000'
+            }
+        }
         stage('Instalar Dependências') {
             steps {
                 // Instala as dependências do projeto
