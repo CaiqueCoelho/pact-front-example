@@ -17,7 +17,7 @@ Replace the placeholders with:
 <token>: Authentication token if your Pact Broker requires it.
 Example:
 
-pact-broker publish ./cypress/pacts --consumer-app-version $(git rev-parse --short HEAD) --broker-base-url http://localhost:9292 --broker-token $PACT_BROKER_TOKEN
+pact-broker publish ./cypress/pacts --consumer-app-version $(git rev-parse --short HEAD) --broker-base-url https://omega.pactflow.io/ --broker-token <TOKEN>
 
 4. Automate in CI/CD Pipeline
 Add the publishing command to your CI/CD pipeline (e.g., in a script section of GitHub Actions, CircleCI, or Jenkins) so that the contract is published after every build or test run.
